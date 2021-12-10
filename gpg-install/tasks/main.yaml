@@ -1,0 +1,7 @@
+---
+- name: install gpg
+  become: true
+  ansible.builtin.apt:
+    name: gpg
+    state: present
+  when: ansible_distribution == 'Debian'

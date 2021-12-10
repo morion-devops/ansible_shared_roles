@@ -1,0 +1,63 @@
+---
+# install on Debian 
+- block:
+  - name: Remove old if installed
+    ansible.builtin.apt:
+      state: absent
+      pkg:
+        - 'docker'
+        - 'docker-engine'
+        - 'docker.io'
+        - 'containerd'
+        - 'runc'
+
+  - name: Install deps
+    ansible.builtin.apt:
+      update_cache: true
+      state: present
+      pkg:
+        - 'ca-certificates'
+        - 'curl'
+        - 'gnupg'
+        - 'lsb-release'
+
+  - name: Add key
+    ansible.builtin.apt_key:
+      url: https://download.docker.com/linux/debian/gpg
+      state: present
+
+  - name: Add repository
+    ansible.builtin.apt_repository:
+      repo: deb https://download.docker.com/linux/debian {{ ansible_distribution_release }} stable
+      state: present
+      update_cache: true
+
+  - name: Install docker
+    ansible.builtin.apt:
+      update_cache: true
+      state: present
+      pkg:
+        - 'docker-ce'
+        - 'docker-ce-cli'
+        - 'containerd.io'
+
+  - name: Add vagrant user to group
+    ansible.builtin.user:
+      append: true
+      name: '{{ user_name }}'
+      groups: docker
+
+  - name: Relogin for apply user group
+    meta: reset_connection
+  
+  - name: Start and enable service
+    ansible.builtin.service:
+      name: docker
+      state: started
+      enabled: true
+
+  become: true
+  when: ansible_distribution == 'Debian'
+
+# if needed, place here another distrubitons
+# instructions are here: https://docs.docker.com/engine/install

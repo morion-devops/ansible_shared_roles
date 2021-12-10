@@ -1,0 +1,24 @@
+---
+
+
+- name: Check if file exists
+  ansible.builtin.stat:
+    path: /etc/docker/daemon.json
+  register: daemon_is_exists
+
+- name: Add insecure registry
+  become: true
+  ansible.builtin.shell: |
+    cat > /etc/docker/daemon.json << EOF
+    {
+        "insecure-registries" : ["192.168.121.100:5000"]
+    }
+    EOF
+  when: not daemon_is_exists.stat.exists
+
+- name: Restart docker
+  become: true
+  ansible.builtin.service:
+    name: docker
+    state: restarted
+  when: not daemon_is_exists.stat.exists

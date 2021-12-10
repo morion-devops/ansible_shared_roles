@@ -1,0 +1,4 @@
+---
+- name: set timezone MSK
+  ansible.builtin.timezone:
+    name: Europe/Moscow
