@@ -1,4 +1,5 @@
 ---
+
 - name: install gpg
   become: true
   ansible.builtin.apt:

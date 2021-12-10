@@ -1,6 +1,5 @@
 ---
 
-
 - name: Check if file exists
   ansible.builtin.stat:
     path: /etc/docker/daemon.json

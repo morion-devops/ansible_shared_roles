@@ -1,19 +1,19 @@
 ---
 
-  - block:
+- block:
     - name: Install deps
       ansible.builtin.apt:
         state: present
         pkg:
-          - 'apt-transport-https' 
-          - 'ca-certificates' 
-          - 'curl'
-    
+          - "apt-transport-https"
+          - "ca-certificates"
+          - "curl"
+
     - name: Add key
       ansible.builtin.apt_key:
         url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
         state: present
-      
+
     - name: Add repository
       ansible.builtin.apt_repository:
         repo: deb https://apt.kubernetes.io/ kubernetes-xenial main
@@ -24,6 +24,6 @@
       ansible.builtin.apt:
         name: kubectl
         state: present
-      
-    become: true
-    when: ansible_os_family == 'Debian'
+
+  become: true
+  when: ansible_os_family == 'Debian'

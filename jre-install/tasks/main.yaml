@@ -1,6 +1,5 @@
 ---
-  
-# install on Debian 
+
 - name: Install jre
   become: true
   ansible.builtin.apt:

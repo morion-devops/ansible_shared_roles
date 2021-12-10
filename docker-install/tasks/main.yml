@@ -1,5 +1,5 @@
 ---
-# install on Debian 
+
 - block:
   - name: Remove old if installed
     ansible.builtin.apt:
@@ -58,6 +58,3 @@
 
   become: true
   when: ansible_distribution == 'Debian'
-
-# if needed, place here another distrubitons
-# instructions are here: https://docs.docker.com/engine/install
