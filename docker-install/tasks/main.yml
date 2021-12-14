@@ -41,10 +41,10 @@
         - 'docker-ce-cli'
         - 'containerd.io'
 
-  - name: Add vagrant user to group
+  - name: Add user to group
     ansible.builtin.user:
       append: true
-      name: '{{ user_name }}'
+      name: '{{ ansible_ssh_user }}'
       groups: docker
 
   - name: Relogin for apply user group
