@@ -1,5 +1,8 @@
 ---
 
+# for this role should use REGISTRY_ADDRESS variable.
+# It can be dns-name or ip-address
+
 - name: Check if file exists
   ansible.builtin.stat:
     path: /etc/docker/daemon.json
@@ -10,7 +13,7 @@
   ansible.builtin.shell: |
     cat > /etc/docker/daemon.json << EOF
     {
-        "insecure-registries" : ["192.168.121.100"]
+        "insecure-registries" : ["{{ REGISTRY_ADDRESS }}"]
     }
     EOF
   when: not daemon_is_exists.stat.exists
