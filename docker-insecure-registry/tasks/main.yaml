@@ -10,7 +10,7 @@
   ansible.builtin.shell: |
     cat > /etc/docker/daemon.json << EOF
     {
-        "insecure-registries" : ["192.168.121.100:5000"]
+        "insecure-registries" : ["192.168.121.100"]
     }
     EOF
   when: not daemon_is_exists.stat.exists
