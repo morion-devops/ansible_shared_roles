@@ -3,7 +3,6 @@
 - name: Install jre
   become: true
   ansible.builtin.apt:
-    update_cache: true
     state: present
     name: 'openjdk-11-jre'
   when: ansible_distribution == 'Debian'

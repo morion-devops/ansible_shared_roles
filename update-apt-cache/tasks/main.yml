@@ -1,0 +1,9 @@
+---
+
+# just update apt-cache
+# can be usefull after provisioning and first run server
+
+- name: Update apt-cache
+  become: true
+  ansible.builtin.apt:
+    update_cache: true
