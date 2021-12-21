@@ -1,6 +1,6 @@
 ---
 - block:
-    - name: redirect 80 to 8600
+    - name: redirect 80 to 8080
       ansible.builtin.iptables:
         table: nat
         chain: PREROUTING
@@ -10,7 +10,7 @@
         destination_port: 80
         jump: REDIRECT
         to_ports: 8080
-        comment: redirect 80 to 8600
+        comment: redirect 80 to 8080
 
     - name: save rule in file
       community.general.iptables_state:
