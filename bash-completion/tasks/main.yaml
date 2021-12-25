@@ -1,7 +1,5 @@
 ---
 
-# Helpful when troubleshootings
-
 - name: Install bash-completion
   become: true
   ansible.builtin.apt:
